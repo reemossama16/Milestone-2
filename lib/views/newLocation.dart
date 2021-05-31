@@ -135,30 +135,28 @@ class _newLocationViewState extends State<newLocationView> {
               ),
               ElevatedButton(
                   child: Text('Add'),
-                  onPressed: () {
+                  onPressed: () async {
                     if (_formKey.currentState.validate()) {
-                      Location loc = Location(
-                        id: ((locationsAll().listobj[(locationsAll().listobj.length) - 1].id) + 1),
+                      //save data to firebase
+                      Location loc = new Location(
                         locationName: _nameController.text,
                         fullDesc: _fullDescController.text,
                         imageurl: _imageurlController.text,
                         locationurl: _locationurlController.text,
                         theme: _themeController.text,
                       );
-                      l.add(loc);
-                      l.addAll(locationsAll().listobj);
+                      final uid = await Provider.of(context).auth.getCurrentUID();
 
-                      for (int i = 0; i < l.length; i++) {
-                        print(l[i].toJson());
-                      }
-
-                      Navigator.of(context).setState(() {
-                        locationsAll().listobj = l;
-                      });
+                      await (Firestore.instance)
+                          .collection('userData')
+                          .document(uid)
+                          .collection('favorites')
+                          .add(loc.toJson());
 
                       Navigator.of(context).popUntil((route) => route.isFirst);
                     }
-                  }),
+                  }
+              ),
             ],
           ),
         ),
