@@ -83,6 +83,9 @@ class EmailValidator{
     if(value.isEmpty){
       return 'Please enter an email';
     }
+    if(!value.contains('@') && !value.contains('.')){
+      return 'Please enter a valid email';
+    }
     return null;
   }
 }
@@ -91,6 +94,9 @@ class PasswordValidator{
   static String validate(String value){
     if(value.isEmpty){
       return 'Please enter a password';
+    }
+    if(value.length<4){
+      return 'Please enter a password with 4 characters minimum';
     }
     return null;
   }

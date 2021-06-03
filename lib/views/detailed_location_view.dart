@@ -4,7 +4,6 @@ import 'package:url_launcher/url_launcher.dart';
 
 class DetailLocationView extends StatefulWidget {
   final Location location;
-
   DetailLocationView({Key key, @required this.location}) : super(key: key);
 
   @override
@@ -20,7 +19,7 @@ class _DetailLocationViewState extends State<DetailLocationView> {
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.green,
         title: Text(widget.location.locationName),
       ),
       floatingActionButton: FloatingActionButton(

@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:test1/services/auth_service.dart';
+import 'package:test1/main.dart';
 import 'package:test1/services/provider_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:test1/models/Location.dart';
 import 'package:test1/locations.dart';
 
-class newLocationView extends StatefulWidget {
-  const newLocationView({Key key}) : super(key: key);
 
+class newLocationView extends StatefulWidget {
+  final List list;
+  const newLocationView({Key key, this.list}) : super(key: key);
   @override
   _newLocationViewState createState() => _newLocationViewState();
 }
 
 class _newLocationViewState extends State<newLocationView> {
-  List l = new List();
   @override
   Widget build(BuildContext context) {
     TextEditingController _nameController = new TextEditingController();
@@ -47,7 +47,7 @@ class _newLocationViewState extends State<newLocationView> {
                 },
                 decoration: new InputDecoration(
                     border: new OutlineInputBorder(
-                        borderSide: new BorderSide(color: Colors.blue)),
+                        borderSide: new BorderSide(color: Colors.green)),
                     labelText: "Location Name",
                     hintText: "Location Name"),
                 controller: _nameController,
@@ -66,7 +66,7 @@ class _newLocationViewState extends State<newLocationView> {
                 },
                 decoration: new InputDecoration(
                     border: new OutlineInputBorder(
-                        borderSide: new BorderSide(color: Colors.blue)),
+                        borderSide: new BorderSide(color: Colors.green)),
                     labelText: "Location Theme",
                     hintText: "Location Theme"),
                 controller: _themeController,
@@ -85,7 +85,7 @@ class _newLocationViewState extends State<newLocationView> {
                 },
                 decoration: new InputDecoration(
                     border: new OutlineInputBorder(
-                        borderSide: new BorderSide(color: Colors.blue)),
+                        borderSide: new BorderSide(color: Colors.green)),
                     labelText: "Location Full Description",
                     hintText: "Location Full Description"),
                 controller: _fullDescController,
@@ -104,7 +104,7 @@ class _newLocationViewState extends State<newLocationView> {
                 },
                 decoration: new InputDecoration(
                     border: new OutlineInputBorder(
-                        borderSide: new BorderSide(color: Colors.blue)),
+                        borderSide: new BorderSide(color: Colors.green)),
                     labelText: "Location Image URL",
                     hintText: "Location Image URL"),
                 controller: _imageurlController,
@@ -123,7 +123,7 @@ class _newLocationViewState extends State<newLocationView> {
                 },
                 decoration: new InputDecoration(
                     border: new OutlineInputBorder(
-                        borderSide: new BorderSide(color: Colors.blue)),
+                        borderSide: new BorderSide(color: Colors.green)),
                     labelText: "Location URL",
                     hintText: "Location URL"),
                 controller: _locationurlController,
@@ -134,7 +134,33 @@ class _newLocationViewState extends State<newLocationView> {
                 width: 10,
               ),
               ElevatedButton(
-                  child: Text('Add'),
+                  child: Text('Add to Explore'),
+                  onPressed: () {
+                    if (_formKey.currentState.validate()) {
+                      Location loc = new Location(
+                        id: (widget.list.length)+1,
+                        locationName: _nameController.text,
+                        fullDesc: _fullDescController.text,
+                        imageurl: _imageurlController.text,
+                        locationurl: _locationurlController.text,
+                        theme: _themeController.text,
+                      );
+                      widget.list.add(loc);
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) => HomeController(list: widget.list)),
+                            (Route<dynamic> route) => false,
+                      );
+                      // Navigator.of(context).pop();
+                    }
+                  }
+              ),
+              SizedBox(
+                height: 10,
+                width: 10,
+              ),
+              ElevatedButton(
+                  child: Text('Add to Firebase'),
                   onPressed: () async {
                     if (_formKey.currentState.validate()) {
                       //save data to firebase

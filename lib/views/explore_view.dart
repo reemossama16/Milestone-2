@@ -4,15 +4,24 @@ import 'package:test1/views/detailed_location_view.dart';
 import 'package:test1/models/Location.dart';
 import 'package:test1/locations.dart';
 
-class ExplorePage extends StatelessWidget {
+class ExplorePage extends StatefulWidget {
+  final List list;
+
+  const ExplorePage({Key key, this.list}) : super(key: key);
+
+  @override
+  _ExplorePageState createState() => _ExplorePageState();
+}
+
+class _ExplorePageState extends State<ExplorePage> {
   List locationsList = locationsAll().listobj;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: new ListView.builder(
-        itemCount: locationsList.length,
-        itemBuilder: (BuildContext context, int index) => buildLocationCard(context, index,locationsList),
+        itemCount: widget.list.length,
+        itemBuilder: (BuildContext context, int index) => buildLocationCard(context, index,widget.list),
       ),
     );
   }

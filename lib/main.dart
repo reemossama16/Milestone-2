@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test1/locations.dart';
 import 'package:test1/services/auth_service.dart';
 import 'package:test1/services/provider_widget.dart';
 import 'package:test1/views/first_view.dart';
@@ -19,12 +20,12 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Favorite Location Apps',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.green,
         ),
         // home: Home(),
-        home: HomeController(),
+        home: HomeController(list: locationsAll().listobj),
         routes: <String, WidgetBuilder>{
-          '/home': (BuildContext context) => HomeController(),
+          '/home': (BuildContext context) => HomeController(list: locationsAll().listobj),
           '/signUp': (BuildContext context) => SignUpView(authFormType: AuthFormType.signUp,),
           '/signIn': (BuildContext context) => SignUpView(authFormType: AuthFormType.signIn,),
           '/anonymousSignIn': (BuildContext context) => SignUpView(authFormType: AuthFormType.anonymous,),
@@ -36,6 +37,9 @@ class MyApp extends StatelessWidget {
 }
 
 class HomeController extends StatelessWidget {
+  final List list;
+
+  const HomeController({Key key, @required this.list}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final AuthService auth = Provider.of(context).auth;
@@ -44,7 +48,7 @@ class HomeController extends StatelessWidget {
       builder: (context, AsyncSnapshot<String> snapshot){
         if(snapshot.connectionState == ConnectionState.active){
           final bool signedIn = snapshot.hasData;
-          return signedIn ? Home(): FirstView();
+          return signedIn ? Home(list: list): FirstView();
         }
         return CircularProgressIndicator();
       },

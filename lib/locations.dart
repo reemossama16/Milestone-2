@@ -1,6 +1,7 @@
 import 'package:test1/models/Location.dart';
 
 class locationsAll {
+
   List listobj = [
     Location(
         id: 1,
@@ -38,10 +39,5 @@ class locationsAll {
         imageurl: "https://justfunfacts.com/wp-content/uploads/2016/08/luxor-temple-colonnade.jpg",
         locationurl: "https://www.google.com/maps/place/Luxor+Temple/@25.6995068,32.6368622,17z/data=!3m1!4b1!4m5!3m4!1s0x144915c41edadf61:0x7693895c346c7d81!8m2!3d25.699502!4d32.6390509"),
   ];
-
-  List add(Location location){
-    locationsAll().listobj.add(location);
-    return locationsAll().listobj;
-  }
 
 }

@@ -11,6 +11,7 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView>{
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -19,7 +20,7 @@ class _HomeViewState extends State<HomeView>{
           builder: (context, snapshot) {
             if(!snapshot.hasData){
               return Scaffold(
-                backgroundColor: Colors.blue,
+                backgroundColor: Colors.green,
                 body: Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,

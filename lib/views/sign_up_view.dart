@@ -6,7 +6,6 @@ enum AuthFormType{signIn, signUp, reset, anonymous, convert}
 
 class SignUpView extends StatefulWidget {
   final AuthFormType authFormType;
-
   SignUpView({Key key, @required this.authFormType}) : super(key: key);
 
   @override
