@@ -41,7 +41,7 @@ class _newLocationViewState extends State<newLocationView> {
               TextFormField(
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter some text';
+                    return 'Please enter name';
                   }
                   return null;
                 },
@@ -60,7 +60,7 @@ class _newLocationViewState extends State<newLocationView> {
               TextFormField(
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter some text';
+                    return 'Please enter theme';
                   }
                   return null;
                 },
@@ -79,7 +79,7 @@ class _newLocationViewState extends State<newLocationView> {
               TextFormField(
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter some text';
+                    return 'Please enter full description';
                   }
                   return null;
                 },
@@ -98,7 +98,7 @@ class _newLocationViewState extends State<newLocationView> {
               TextFormField(
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter some text';
+                    return 'Please enter image URL';
                   }
                   return null;
                 },
@@ -117,7 +117,7 @@ class _newLocationViewState extends State<newLocationView> {
               TextFormField(
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter some text';
+                    return 'Please enter location URL';
                   }
                   return null;
                 },
@@ -146,11 +146,17 @@ class _newLocationViewState extends State<newLocationView> {
                         theme: _themeController.text,
                       );
                       widget.list.add(loc);
-                      Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(builder: (context) => HomeController(list: widget.list)),
-                            (Route<dynamic> route) => false,
-                      );
+
+                      //new code
+                      _formKey.currentState.save();
+                      Navigator.of(context).pop();
+
+                      //old code
+                      // Navigator.pushAndRemoveUntil(
+                      //   context,
+                      //   MaterialPageRoute(builder: (context) => HomeController(list: widget.list)),
+                      //       (Route<dynamic> route) => false,
+                      // );
                       // Navigator.of(context).pop();
                     }
                   }

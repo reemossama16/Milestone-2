@@ -32,6 +32,9 @@ class _HomeState extends State<Home> {
           backgroundColor: Colors.green,
           child: Icon(Icons.add),
           onPressed: (){
+            setState(() {
+              _currentIndex = 0;
+            });
             Navigator.push(context, MaterialPageRoute(builder: (context) => newLocationView(list: widget.list),));
           }
       ),

@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:test1/views/detailed_location_view.dart';
-import 'package:test1/models/Location.dart';
 import 'package:test1/locations.dart';
 
 class ExplorePage extends StatefulWidget {
